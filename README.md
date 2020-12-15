@@ -33,8 +33,12 @@ Implement a checkout system which handles their pricing schemes.
 - What format do the pricing rules need to be in?
 - How do we design the pricing ruled?
 - Future Considerations - how to scale and add new pricing rules in the future.
+- What items do we want to allow a pre-determined set of items in an array or any items within reason?
 
 ## Dependencies
+
+- Jest
+- ChalkJS
 
 ## Criteria
 
