@@ -14,9 +14,8 @@ const askQuestion = () => {
   rl.question(
     'Welcome to GroceryCo please scan in your items, if you are done scanning type done. ',
     (item) => {
-      console.log(item);
       if (item === 'done') {
-        rl.close();
+       returnShoppingList();
       } else {
         shoppingCart.push(item);
         askNextQuestion();
@@ -30,9 +29,8 @@ const askNextQuestion = () => {
   rl.question(
     'Please scan in your next item, if you are done scanning type done. ',
     (item) => {
-      console.log(item);
       if (item === 'done') {
-        rl.close();
+        returnShoppingList()
       } else {
         shoppingCart.push(item);
         askQuestion();
@@ -41,14 +39,25 @@ const askNextQuestion = () => {
   );
 };
 
-if (scanning) {
-  askQuestion();
-} else {
+// if (scanning) {
+//   askQuestion();
+// } else {
+//   return shoppingCart;
+// }
+
+// return the itemized grocery list with totals here
+// rl.on('close', () => {
+//   console.log(shoppingCart);
+//   process.exit(0);
+// });
+
+const returnShoppingList = () => {
+  console.log(shoppingCart)
   rl.close();
 }
 
-//return the itemized grocery list with totals here
-rl.on('close', () => {
-  console.log(shoppingCart);
-  process.exit(0);
-});
+askQuestion();
+
+module.exports = {
+  returnShoppingList, shoppingCart
+}
