@@ -1,0 +1,26 @@
+{
+  "name": "GroceryCo-Checkout-System-Solution",
+  "version": "1.0.0",
+  "description": "## Overview",
+  "main": "checkout.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewRLloyd88/GroceryCo-Checkout-System-Solution.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewRLloyd88/GroceryCo-Checkout-System-Solution/issues"
+  },
+  "homepage": "https://github.com/AndrewRLloyd88/GroceryCo-Checkout-System-Solution#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}
