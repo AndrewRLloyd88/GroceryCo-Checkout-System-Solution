@@ -28,16 +28,74 @@ Implement a checkout system which handles their pricing schemes.
 - The user must recieve an itemzed receipt and total price as an output
 - An item may be priced individually
 
+## Scenarios
+
+## Scenario 1
+
+```
+$ gco price orange 75
+$ gco price orange 50
+$
+$ gco add orange
+$ gco add apple
+$
+$ gco checkout
+> Thank you for shopping at GroceryCo!
+Here are your items
+
+  APPLE $0.75
+  ORANGE $0.50
+
+  TOTAL: $1.25
+
+Come again!
+
+====
+```
+
+## Scenario 2
+
+```$ gco price orange 75 # this will be ignored since lowest price is 50
+
+$ gco price orange 50 # this will be preferred price for single oranges
+
+$ gco price orange --quantity 2 --name "Buy 1 get 1 free" 50 # This will be used if there are 2 oranges
+
+$ gco price orange --quantity 3 --name "Threepak" 75 # This will be used if there are 3 oranges...
+
+$ # Note.... apply the discount for the AVERAGE price of the items.
+
+$
+$ gco add orange
+$ gco add apple
+$
+$ gco checkout
+> Thank you for shopping at GroceryCo!
+Here are your items
+
+  APPLE $0.75
+  ORANGE $0.50
+
+  TOTAL: $1.25
+
+Come again!
+
+====
+```
+
 ## Design Considerations
 
 - What format do the pricing rules need to be in?
 - How do we design the pricing ruled?
 - Future Considerations - how to scale and add new pricing rules in the future.
 - What items do we want to allow a pre-determined set of items in an array or any items within reason?
+- How do we apply multiple offers at the same time?
 
 ## Dependencies
 
 - Jest
+- Commander
+- FS
 - ChalkJS
 
 ## Criteria

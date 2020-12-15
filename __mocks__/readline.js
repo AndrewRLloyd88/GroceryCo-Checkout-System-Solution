@@ -6,3 +6,4 @@ module.exports = {
     close: jest.fn().mockImplementationOnce(() => undefined)
   })
 };
+
