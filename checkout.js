@@ -14,24 +14,21 @@ const askQuestion = () => {
   rl.question(
     'Welcome to GroceryCo please scan in your items, if you are done scanning type done. ',
     (item) => {
+      //user is done scanning
       if (item === 'done') {
-       returnShoppingList();
-      } else {
-        shoppingCart.push(item);
-        askNextQuestion();
+        scanning = false;
+        returnShoppingList();
       }
-    }
-  );
-};
 
-//asks this question the next time around
-const askNextQuestion = () => {
-  rl.question(
-    'Please scan in your next item, if you are done scanning type done. ',
-    (item) => {
-      if (item === 'done') {
-        returnShoppingList()
-      } else {
+      //add help menu
+      if (item === 'help') {
+        console.log('help');
+        askQuestion();
+      }
+
+      //push an item to the cart
+      //and prompt user for next action
+      if (scanning) {
         shoppingCart.push(item);
         askQuestion();
       }
@@ -39,25 +36,16 @@ const askNextQuestion = () => {
   );
 };
 
-// if (scanning) {
-//   askQuestion();
-// } else {
-//   return shoppingCart;
-// }
-
-// return the itemized grocery list with totals here
-// rl.on('close', () => {
-//   console.log(shoppingCart);
-//   process.exit(0);
-// });
-
 const returnShoppingList = () => {
-  console.log(shoppingCart)
+  console.log(shoppingCart);
   rl.close();
-}
+};
 
-askQuestion();
+if (scanning) {
+  askQuestion();
+}
 
 module.exports = {
-  returnShoppingList, shoppingCart
-}
+  returnShoppingList,
+  shoppingCart,
+};
