@@ -1,7 +1,16 @@
 const stateHelpers = require('../helpers/stateHelpers');
 const cartpath = 'testcart.json';
 const unitPricePath = 'testUnitPrices.json';
-const unitPrices = {
+const testUpdateUnitPricesPath = 'testUpdateUnitPrices.json'
+const testUpdatePriceWithPreviousPath = 'testUpdatePriceWithPrevious.json'
+const testUnitPrices = {
+    "apple": { "currentPrice": 0.75, "previousPrice": null },
+    "orange": { "currentPrice": 0.8, "previousPrice": null },
+    "banana": { "currentPrice": 0.5, "previousPrice": null },
+    "pear": { "currentPrice": 0.95, "previousPrice": 1.5 }
+}
+
+const testCurrentPrice = {
     "apple": { "currentPrice": 0.75, "previousPrice": null },
     "orange": { "currentPrice": 0.8, "previousPrice": null },
     "banana": { "currentPrice": 0.5, "previousPrice": null },
@@ -47,9 +56,27 @@ describe('stateHelpers', () => {
   });
 
   describe('setUnitPrice', () => {
-    test('Should return an array', () => {
-    const returnValue = stateHelpers.setUnitPrice(unitPrices, 'apple', 1.50);
+    test('Should return an object', () => {
+    const returnValue = stateHelpers.setUnitPrice(testUnitPrices, 'apple', 2.50, testUpdateUnitPricesPath);
       expect(typeof returnValue).toBe('object');
     });
+    test('Should set the currentPrice on the correct item and for the correct value a user inputs if previousPrice === null', () => {
+      const returnValue = stateHelpers.setUnitPrice(testUnitPrices, 'apple', 2.50, testUpdateUnitPricesPath, 0.75);
+        expect(returnValue).toEqual({
+          "apple": { "currentPrice": 2.50, "previousPrice": 0.75 },
+          "orange": { "currentPrice": 0.8, "previousPrice": null },
+          "banana": { "currentPrice": 0.5, "previousPrice": null },
+          "pear": { "currentPrice": 0.95, "previousPrice": 1.5 }
+      });
+      });
+      test('Should set the currentPrice and previousPrice correctly according to user input if there is a previous price listed', () => {
+        const returnValue = stateHelpers.setUnitPrice(testCurrentPrice, 'pear', 0.55, testUpdatePriceWithPreviousPath, 0.75);
+          expect(returnValue).toEqual({
+            "apple": { "currentPrice": 0.75, "previousPrice": null },
+            "orange": { "currentPrice": 0.8, "previousPrice": null },
+            "banana": { "currentPrice": 0.5, "previousPrice": null },
+            "pear": { "currentPrice": 0.55, "previousPrice": 0.75 }
+        });
+        });
   });
 });

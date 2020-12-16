@@ -1,5 +1,6 @@
 const fs = require('fs');
 let cart = [];
+let priceList = {}
 
 //Setters and getters for cart
 const addToCart = (cartpath, item) => {
@@ -44,14 +45,20 @@ const getUnitPrices = (unitPricePath) => {
   }
 };
 
-const setUnitPrice = (unitPrices, item, amount) => {
-  //create a mutable version of unitPrices 
-const newUnitPrices = unitPrices
-console.log("newUnitPrices", newUnitPrices)
+const setUnitPrice = (unitPrices, item, amount, pricePath, previousAmount) => {
 
-//modify temp obj
-unitPrice.item.previousAmount 
-unitPrice.item.currentAmount 
+priceList = unitPrices;
+
+priceList[item] = {currentPrice: amount, previousPrice: previousAmount}
+
+
+const content = JSON.stringify(priceList);
+  fs.writeFileSync(pricePath, content);
+
+  if (fs.existsSync(pricePath)) {
+    const rawPriceData = fs.readFileSync(pricePath);
+    return JSON.parse(rawPriceData);
+  }
 
 }
 

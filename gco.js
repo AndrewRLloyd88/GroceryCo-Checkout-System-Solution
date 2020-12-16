@@ -48,8 +48,8 @@ if(program.price && !program.amount){
 if (program.price && program.amount) {
   console.log(program.price)
   console.log(program.amount)
-  unitPrices = stateHelpers.getUnitPrices(unitPricePath);
-  stateHelpers.setUnitPrice(unitPrices, )
+  const previousAmount = unitPrices[program.price].currentPrice
+  stateHelpers.setUnitPrice(unitPrices, program.price, program.amount, previousAmount)
   formatUnitPrices(unitPrices)
 }
 
