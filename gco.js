@@ -4,6 +4,7 @@ const program = new Command();
 const cartpath = './cart.json'
 const unitPricePath = './unitPrices.json'
 const stateHelpers = require('./helpers/stateHelpers');
+const printReceipt = require('./helpers/printReceipt').printReceipt
 const checkOut = require('./helpers/checkout').checkOutCart
 const formatUnitPrices = require('./helpers/formatUnitPrices').formatUnitPrices
 
@@ -19,8 +20,8 @@ program
 
 program.parse(process.argv);
 
+//cli commands for the interface
 if (program.add) {
-
   stateHelpers.addToCart(cartpath, program.add)
   cart = stateHelpers.getCart(cartpath)
   console.log("in cart :", cart)
@@ -30,7 +31,6 @@ if (program.cart) {
   cart = stateHelpers.getCart(cartpath)
   console.log('Your current cart contains: ' + cart)
 };
-
 
 if (program.price) {
   unitPrices = stateHelpers.getUnitPrices(unitPricePath);
@@ -42,7 +42,7 @@ if (program.checkout) {
   unitPrices = stateHelpers.getUnitPrices(unitPricePath)
   const total = checkOut(cart, unitPrices)
   console.log('total is:', total)
-  //printReceipt()
+  console.log(printReceipt(total, cart, unitPrices))
 }
 
 
