@@ -1,6 +1,6 @@
 {
-  "apple": 0.75,
-  "orange": 0.8,
-  "banana": 0.5,
-  "pear": 0.95
+  "apple": { "currentPrice": 0.75, "previousPrice": null },
+  "orange": { "currentPrice": 0.8, "previousPrice": null },
+  "banana": { "currentPrice": 0.5, "previousPrice": null },
+  "pear": { "currentPrice": 0.95, "previousPrice": null }
 }

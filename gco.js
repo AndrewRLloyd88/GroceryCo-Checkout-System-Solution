@@ -14,7 +14,8 @@ let unitPrices = {};
 program
 .option('--add <item>', 'adds an item to your cart')
 .option('--cart', 'view cart')
-.option('--price', 'list unit prices')
+.option('--pricelist', 'list unit prices')
+.option('--price <item> <price>', 'change a unit price or add a pricing rule')
 .option('--checkout', 'recieve your itemized receipt')
 
 
@@ -32,6 +33,13 @@ if (program.cart) {
   console.log('Your current cart contains: ' + cart)
 };
 
+//gets all current prices
+if (program.pricelist) {
+  unitPrices = stateHelpers.getUnitPrices(unitPricePath);
+  formatUnitPrices(unitPrices)
+}
+
+//set price for item and promotions
 if (program.price) {
   unitPrices = stateHelpers.getUnitPrices(unitPricePath);
   formatUnitPrices(unitPrices)

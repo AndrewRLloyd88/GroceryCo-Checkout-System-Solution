@@ -1,7 +1,7 @@
 const buildReceiptList = require('./listItemsAndPrices').buildReceiptList
 const printReceipt = (total, cart, unitPrices ) => {
 
-const receiptList =  buildReceiptList(total, cart, unitPrices)
+const receiptList =  buildReceiptList(cart, unitPrices)
 console.log(receiptList)
 const tally = []
 let list = ""

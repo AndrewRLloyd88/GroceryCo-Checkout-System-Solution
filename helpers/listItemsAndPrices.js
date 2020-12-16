@@ -1,16 +1,27 @@
-const buildReceiptList = (total, cart, unitPrices) => {
+const buildReceiptList = (cart, unitPrices) => {
   const list = {}
-  console.log(unitPrices)
   //get each item in the array
   for(item in cart){
+    const [currentPrice, previousPrice] = getOriginalAndSalePrice(item, cart, unitPrices)
     if (list[cart[item]]) {
-    list[cart[item]] = [quantity += 1, unitPrices[cart[item]]]
+    list[cart[item]] = [quantity += 1, currentPrice, previousPrice]
   } else {
-    list[cart[item]] = [quantity = 1, unitPrices[cart[item]]]
+    list[cart[item]] = [quantity = 1, currentPrice, previousPrice]
   }
 }
   //check if there are any pricing rules for that item
   return list;
 }
 
-module.exports = {buildReceiptList}
+const getOriginalAndSalePrice = (item, cart, unitPrices) => {
+  const currentItem = cart[item]
+  const currentPrice = unitPrices[currentItem].currentPrice
+  const previousPrice = unitPrices[currentItem].previousPrice
+
+if(previousPrice < currentPrice){
+  return([currentPrice, null])
+}
+return([currentPrice, previousPrice]);
+}
+
+module.exports = {buildReceiptList, getOriginalAndSalePrice}

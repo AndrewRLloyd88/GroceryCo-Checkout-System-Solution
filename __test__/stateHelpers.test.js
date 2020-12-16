@@ -18,11 +18,12 @@ describe("getPrices", () => {
   test("Should return an object containing our prices if the correct pricepath is passed in", () => {
       const returnValue = stateHelpers.getUnitPrices(unitPricePath)
       expect( returnValue ).toEqual( {
-        "apple": 0.75,
-        "orange": 0.8,
-        "banana": 0.5,
-        "pear": 0.95
-      } );
+        "apple": { "currentPrice": 0.75, "previousPrice": null },
+        "orange": { "currentPrice": 0.8, "previousPrice": null },
+        "banana": { "currentPrice": 0.5, "previousPrice": null },
+        "pear": { "currentPrice": 0.95, "previousPrice": null }
+      }
+      );
    });
 
    test("Should return undefined if no cartpath is passed in", () => {
