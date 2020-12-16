@@ -28,11 +28,33 @@ Implement a checkout system which handles their pricing schemes.
 - The user must recieve an itemzed receipt and total price as an output
 - An item may be priced individually
 
+# Base Prices
+
+- Contained in unitPrices.json
+
+```
+{
+  "apple": {
+    "currentPrice": 0.75, "previousPrice": null
+    },
+  "orange": {
+    "currentPrice": 0.8, "previousPrice": null
+    },
+  "banana": {
+    "currentPrice": 0.5, "previousPrice": null
+    },
+  "pear": {
+    "currentPrice": 0.95, "previousPrice": null
+    }
+}
+```
+
 # Scenarios
 
 ## Scenario 1
 
 ```
+
 $ gco price orange 75
 $ gco price orange 50
 $
@@ -40,18 +62,57 @@ $ gco add orange
 $ gco add apple
 $
 $ gco checkout
+
 > Thank you for shopping at GroceryCo!
-Here are your items
+> Here are your items
 
-  APPLE $0.75
-  ORANGE $0.50
+APPLE $0.75
+ORANGE $0.50
 
-  TOTAL: $1.25
+TOTAL: $1.25
 
-Come again!
+We look forward to your next visit!
 
 ====
+
 ```
+
+## Scenario 2
+
+```
+==========================================
+$ gco --price pear .95
+$
+$ gco --add pear
+$ gco --add orange
+$ gco --add banana
+$ gco --add pear
+$ gco --add orange
+$ gco --add pear
+$ gco --add apple
+$ gco --add pear
+$ gco --add apple
+$ gco --add banana
+$ gco --add pear
+$ gco --add apple
+$
+$ gco --checkout
+
+> Thank you for shopping at GroceryCo!
+> Here are your items
+
+APPLE x3  $0.75
+ORANGE x2  $0.80
+BANANA x2  $0.50
+PEAR x5 was $1.50 now $0.95
+
+We look forward to your next visit!
+
+==========================================
+
+```
+
+![Printed Receipt](./docs/receipt_s2.png 'Optional Title')
 
 ## Scenario 2
 

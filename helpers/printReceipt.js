@@ -11,7 +11,7 @@ for(item in receiptList){
   let quantity = `x${receiptList[item][0]}`
   let previousPrice = receiptList[item][2] ? receiptList[item][2] : null
   console.log("prevPrice :", previousPrice)
-  
+
   list += `${currentItem} ${quantity} ${previousPrice === null ? '' : "was $" + previousPrice.toFixed(2)} ${previousPrice === null ? '$' + receiptList[item][1].toFixed(2) : "now $" + receiptList[item][1].toFixed(2) }` + "\n            "
 
 
@@ -24,7 +24,7 @@ Thank you for shopping at GroceryCo!\n
 
             ${list}
 
-            TOTAL: ${total}
+            TOTAL: $${total}
 
   We look forward to your next visit!
 
