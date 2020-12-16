@@ -15,7 +15,8 @@ program
 .option('--add <item>', 'adds an item to your cart')
 .option('--cart', 'view cart')
 .option('--pricelist', 'list unit prices')
-.option('--price <item> <price>', 'change a unit price or add a pricing rule')
+.option('--price <item>', 'set a price for an item')
+.option('--amount <amount>', 'change the unit price for the selected item')
 .option('--checkout', 'recieve your itemized receipt')
 
 
@@ -39,9 +40,16 @@ if (program.pricelist) {
   formatUnitPrices(unitPrices)
 }
 
+if(program.price && !program.amount){
+  console.log('Tip: To set the price for an item for example apples type: --price apple --amount 1.50')
+}
+
 //set price for item and promotions
-if (program.price) {
+if (program.price && program.amount) {
+  console.log(program.price)
+  console.log(program.amount)
   unitPrices = stateHelpers.getUnitPrices(unitPricePath);
+  stateHelpers.setUnitPrice(unitPrices, )
   formatUnitPrices(unitPrices)
 }
 

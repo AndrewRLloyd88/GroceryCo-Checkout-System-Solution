@@ -10,7 +10,6 @@ const buildReceiptList = (cart, unitPrices) => {
   }
 }
   //check if there are any pricing rules for that item
-  console.log(list);
   return list;
 }
 

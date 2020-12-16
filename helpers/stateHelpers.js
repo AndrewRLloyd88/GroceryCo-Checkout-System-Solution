@@ -44,4 +44,15 @@ const getUnitPrices = (unitPricePath) => {
   }
 };
 
-module.exports = { addToCart, getUnitPrices, getCart };
+const setUnitPrice = (unitPrices, item, amount) => {
+  //create a mutable version of unitPrices 
+const newUnitPrices = unitPrices
+console.log("newUnitPrices", newUnitPrices)
+
+//modify temp obj
+unitPrice.item.previousAmount 
+unitPrice.item.currentAmount 
+
+}
+
+module.exports = { addToCart, getUnitPrices, getCart, setUnitPrice };
