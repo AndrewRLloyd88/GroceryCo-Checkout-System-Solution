@@ -1,6 +1,7 @@
 const fs = require('fs');
-const cartpath = './checkout.json'
+const cartpath = './cart.json'
 const unitpricepath = './unitPrices.json'
+const stateHelpers = require('./helpers/stateHelpers');
 const { Command } = require('commander');
 const program = new Command();
 const formatUnitPrices = require('./helpers/formatUnitPrices').formatUnitPrices
@@ -18,21 +19,18 @@ program
 program.parse(process.argv);
 
 if (program.add) {
-  if (fs.existsSync(cartpath)) {
-    const rawdata = fs.readFileSync('checkout.json')
-    cart = JSON.parse(rawdata);
-  }
+  cart = stateHelpers.getCart(cartpath)
   cart.push(program.add)
   console.log(`${program.add} added`);
   const content = JSON.stringify(cart);
-  fs.writeFileSync('checkout.json', content);
+  fs.writeFileSync('cart.json', content);
   console.log("in cart :", cart)
 }
 
 
 if (program.cart) {
 console.log('Your current cart contains: ')
-const rawdata = fs.readFileSync('checkout.json')
+const rawdata = fs.readFileSync('cart.json')
 let currentCart = JSON.parse(rawdata);
 console.log(currentCart);
 };
@@ -47,7 +45,7 @@ if (program.price) {
 }
 
 if (program.checkout) {
-  //getCart()
+  cart = stateHelpers.getCart(cartpath)
   //getUnitPrices()
   //checkOut()
   //printReceipt()

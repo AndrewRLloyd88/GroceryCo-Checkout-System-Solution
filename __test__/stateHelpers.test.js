@@ -1,6 +1,5 @@
 const stateHelpers = require('../helpers/stateHelpers');
-const fs = require('fs');
-const cartpath = './checkout.json'
+const cartpath = 'test.json'
 
 describe("getCart", () => {
   test("Should return an array containing our cart items if the correct cartpath is passed in", () => {
