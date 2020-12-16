@@ -54,14 +54,14 @@ Implement a checkout system which handles their pricing schemes.
 ## Scenario 1
 
 ```
-
-$ gco price orange 75
-$ gco price orange 50
+==========================================
+$ node gco.js price orange 75
+$ node gco.js price orange 50
 $
-$ gco add orange
-$ gco add apple
+$ node gco.js add orange
+$ node gco.js add apple
 $
-$ gco checkout
+$ node gco.js checkout
 
 > Thank you for shopping at GroceryCo!
 > Here are your items
@@ -73,7 +73,7 @@ TOTAL: $1.25
 
 We look forward to your next visit!
 
-====
+==========================================
 
 ```
 
@@ -81,22 +81,22 @@ We look forward to your next visit!
 
 ```
 ==========================================
-$ gco --price pear .95
+$ node gco.js --price pear .95
 $
-$ gco --add pear
-$ gco --add orange
-$ gco --add banana
-$ gco --add pear
-$ gco --add orange
-$ gco --add pear
-$ gco --add apple
-$ gco --add pear
-$ gco --add apple
-$ gco --add banana
-$ gco --add pear
-$ gco --add apple
+$ node gco.js --add pear
+$ node gco.js --add orange
+$ node gco.js --add banana
+$ node gco.js --add pear
+$ node gco.js --add orange
+$ node gco.js --add pear
+$ node gco.js --add apple
+$ node gco.js --add pear
+$ node gco.js --add apple
+$ node gco.js --add banana
+$ node gco.js --add pear
+$ node gco.js --add apple
 $
-$ gco --checkout
+$ node gco.js --checkout
 
 > Thank you for shopping at GroceryCo!
 > Here are your items
@@ -114,7 +114,7 @@ We look forward to your next visit!
 
 ![Printed Receipt](./docs/receipt_s2.png 'Optional Title')
 
-## Scenario 2
+## Scenario 3
 
 ```$ gco price orange 75 # this will be ignored since lowest price is 50
 
