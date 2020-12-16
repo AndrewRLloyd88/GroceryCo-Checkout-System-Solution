@@ -28,7 +28,7 @@ Implement a checkout system which handles their pricing schemes.
 - The user must recieve an itemzed receipt and total price as an output
 - An item may be priced individually
 
-## Scenarios
+# Scenarios
 
 ## Scenario 1
 
@@ -86,10 +86,11 @@ Come again!
 ## Design Considerations
 
 - What format do the pricing rules need to be in?
-- How do we design the pricing ruled?
+- How do we design the pricing rules?
 - Future Considerations - how to scale and add new pricing rules in the future.
 - What items do we want to allow a pre-determined set of items in an array or any items within reason?
 - How do we apply multiple offers at the same time?
+- Need to limit the ability to checkout before pricing is added?
 
 ## Dependencies
 

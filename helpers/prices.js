@@ -1,8 +1,8 @@
 const prices = {
-  apples: 0.75,
-  oranges: 0.80,
-  bananas: 0.50,
-  pears: 0.95
+  apple: 0.75,
+  orange: 0.80,
+  banana: 0.50,
+  pear: 0.95
 }
 
 module.exports = {prices}

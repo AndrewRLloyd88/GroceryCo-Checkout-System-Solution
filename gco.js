@@ -1,20 +1,23 @@
 const fs = require('fs');
-const path = './checkout.json'
+const cartpath = './checkout.json'
+const unitpricepath = './unitPrices.json'
 const { Command } = require('commander');
 const program = new Command();
+const formatUnitPrices = require('./helpers/formatUnitPrices').formatUnitPrices
 
 let cart = [];
+let unitprices = {};
 
 program
-.option('-add, --add <shopping>', 'output extra debugging')
-.option('-cart, --cart', 'view cart')
-.option('-price, --pizza-type <type>', 'flavour of pizza');
+.option('--add <shopping>', 'output extra debugging')
+.option('--cart', 'view cart')
+.option('--price', 'listed unit prices');
 
 
 program.parse(process.argv);
 
 if (program.add) {
-  if (fs.existsSync(path)) {
+  if (fs.existsSync(cartpath)) {
     const rawdata = fs.readFileSync('checkout.json')
     cart = JSON.parse(rawdata);
   }
@@ -27,14 +30,20 @@ if (program.add) {
 
 
 if (program.cart) {
-console.log('in cart')
+console.log('Your current cart contains: ')
 const rawdata = fs.readFileSync('checkout.json')
 let currentCart = JSON.parse(rawdata);
 console.log(currentCart);
 };
 
 
-if (program.pizzaType) console.log(`- ${program.pizzaType}`);
+if (program.price) {
+  if (fs.existsSync(unitpricepath)) {
+    const rawPriceData = fs.readFileSync('unitPrices.json')
+    unitprices = JSON.parse(rawPriceData);
+  }
+  formatUnitPrices(unitprices)
+}
 
 // scenario 1.
 // $ gco price orange 75
