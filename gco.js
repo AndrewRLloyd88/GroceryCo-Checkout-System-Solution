@@ -1,55 +1,50 @@
 const fs = require('fs');
-const cartpath = './cart.json'
-const unitpricepath = './unitPrices.json'
-const stateHelpers = require('./helpers/stateHelpers');
 const { Command } = require('commander');
 const program = new Command();
+const cartpath = './cart.json'
+const unitPricePath = './unitPrices.json'
+const stateHelpers = require('./helpers/stateHelpers');
+const checkOut = require('./helpers/checkout').checkOutCart
 const formatUnitPrices = require('./helpers/formatUnitPrices').formatUnitPrices
 
 let cart = [];
-let unitprices = {};
+let unitPrices = {};
 
 program
-.option('--add <shopping>', 'output extra debugging')
+.option('--add <item>', 'adds an item to your cart')
 .option('--cart', 'view cart')
-.option('--price', 'listed unit prices')
+.option('--price', 'list unit prices')
 .option('--checkout', 'recieve your itemized receipt')
 
 
 program.parse(process.argv);
 
 if (program.add) {
+
+  stateHelpers.addToCart(cartpath, program.add)
   cart = stateHelpers.getCart(cartpath)
-  cart.push(program.add)
-  console.log(`${program.add} added`);
-  const content = JSON.stringify(cart);
-  fs.writeFileSync('cart.json', content);
   console.log("in cart :", cart)
 }
 
-
 if (program.cart) {
-console.log('Your current cart contains: ')
-const rawdata = fs.readFileSync('cart.json')
-let currentCart = JSON.parse(rawdata);
-console.log(currentCart);
+  cart = stateHelpers.getCart(cartpath)
+  console.log('Your current cart contains: ' + cart)
 };
 
 
 if (program.price) {
-  if (fs.existsSync(unitpricepath)) {
-    const rawPriceData = fs.readFileSync('unitPrices.json')
-    unitprices = JSON.parse(rawPriceData);
-  }
-  formatUnitPrices(unitprices)
+  unitPrices = stateHelpers.getUnitPrices(unitPricePath);
+  formatUnitPrices(unitPrices)
 }
 
 if (program.checkout) {
   cart = stateHelpers.getCart(cartpath)
-  //getUnitPrices()
-  //checkOut()
+  unitPrices = stateHelpers.getUnitPrices(unitPricePath)
+  const total = checkOut(cart, unitPrices)
+  console.log('total is:', total)
   //printReceipt()
 }
+
 
 // scenario 1.
 // $ gco price orange 75
