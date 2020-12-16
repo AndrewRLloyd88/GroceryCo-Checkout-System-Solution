@@ -2,19 +2,23 @@ const buildReceiptList = require('./listItemsAndPrices').buildReceiptList
 const printReceipt = (total, cart, unitPrices ) => {
 
 const receiptList =  buildReceiptList(cart, unitPrices)
-console.log(receiptList)
 const tally = []
 let list = ""
+console.log(receiptList)
 
 for(item in receiptList){
-  list += `${item.toUpperCase()} x${receiptList[item][0]} $${receiptList[item][1].toFixed(2)}` + "\n            "
+  let currentItem = `${item.toUpperCase()}`
+  let quantity = `x${receiptList[item][0]}`
+  let previousPrice = receiptList[item][2] ? receiptList[item][2] : null
+  console.log("prevPrice :", previousPrice)
+  
+  list += `${currentItem} ${quantity} ${previousPrice === null ? '' : "was $" + previousPrice.toFixed(2)} ${previousPrice === null ? '$' + receiptList[item][1].toFixed(2) : "now $" + receiptList[item][1].toFixed(2) }` + "\n            "
+
 
 }
 
-// tally.push(`${item.toUpperCase()} x${receiptList[item][0]} $${receiptList[item][1].toFixed(2)}`)
-
 const receipt = `
-======================================
+=========================================
 Thank you for shopping at GroceryCo!\n
         Here are your items\n
 
@@ -22,9 +26,9 @@ Thank you for shopping at GroceryCo!\n
 
             TOTAL: ${total}
 
-             Come again!
+  We look forward to your next visit!
 
-=======================================`
+=========================================`
 return receipt;
 }
 

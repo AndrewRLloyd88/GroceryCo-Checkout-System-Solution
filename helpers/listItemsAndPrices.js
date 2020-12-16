@@ -10,14 +10,17 @@ const buildReceiptList = (cart, unitPrices) => {
   }
 }
   //check if there are any pricing rules for that item
+  console.log(list);
   return list;
 }
 
+//get both currentPrice and previousPrice from our unitPrices
 const getOriginalAndSalePrice = (item, cart, unitPrices) => {
   const currentItem = cart[item]
   const currentPrice = unitPrices[currentItem].currentPrice
   const previousPrice = unitPrices[currentItem].previousPrice
 
+  //use null here to render was $ now $ conditionally on receipt
 if(previousPrice < currentPrice){
   return([currentPrice, null])
 }

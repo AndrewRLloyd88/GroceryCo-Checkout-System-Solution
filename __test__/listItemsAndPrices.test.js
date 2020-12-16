@@ -34,9 +34,14 @@ describe('listItemsAndPrices', () => {
       const returnValue = listItemsAndPrices.buildReceiptList(cart, unitPrices);
       expect(typeof returnValue).toBe('object');
     });
-    test('Should return an object', () => {
+    test('Should return an object containing item name, quantity, [currentPrice and previousPrice(if > currentPrice)] ', () => {
       const returnValue = listItemsAndPrices.buildReceiptList(cart, unitPrices);
-      expect(typeof returnValue).toBe('object');
+      expect(returnValue).toEqual({
+        apple: [ 1, 0.75, null ],
+        orange: [ 1, 0.8, null ],
+        banana: [ 1, 0.85, null ],
+        pear: [ 1, 0.65, 0.85 ]
+      });
     });
   });
 });
