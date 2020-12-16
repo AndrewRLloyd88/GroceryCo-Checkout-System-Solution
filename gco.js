@@ -11,7 +11,8 @@ let unitprices = {};
 program
 .option('--add <shopping>', 'output extra debugging')
 .option('--cart', 'view cart')
-.option('--price', 'listed unit prices');
+.option('--price', 'listed unit prices')
+.option('--checkout', 'recieve your itemized receipt')
 
 
 program.parse(process.argv);
@@ -43,6 +44,13 @@ if (program.price) {
     unitprices = JSON.parse(rawPriceData);
   }
   formatUnitPrices(unitprices)
+}
+
+if (program.checkout) {
+  //getCart()
+  //getUnitPrices()
+  //checkOut()
+  //printReceipt()
 }
 
 // scenario 1.
