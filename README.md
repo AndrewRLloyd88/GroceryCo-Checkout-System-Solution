@@ -22,6 +22,17 @@ Implement a checkout system which handles their pricing schemes.
   The solution may use third party libraries but must be supplied.
 - Submissions are due three (3) days from receipt of this exercise.
 
+## Criteria
+
+The solution will be examined from these perspectives:
+
+- good design
+- readability
+- maintenance
+- testing
+- operational-ness
+- aesthetics
+
 ## User Stories
 
 - A User must be able to imput a single unsorted list of items into a command line interface
@@ -45,13 +56,38 @@ Implement a checkout system which handles their pricing schemes.
 ## Commands
 
 Options:
---add <item> adds an item to your cart
---cart view cart
---pricelist list unit prices
---price <item> set a price for an item
---amount <amount> change the unit price for the selected item
---checkout recieve your itemized receipt
--h, --help display help for command
+
+--add [item]
+
+adds an item to your cart
+
+--cart
+
+view current items in cart
+
+--pricelist
+
+list current unit prices
+
+--price [item]
+
+set a price for an item - used in conjunction with --amount (see below)
+
+--amount [amount]
+
+change the unit price for the selected item - used in conjunction with --price (see below)
+
+<b>Set the price of an item </b>
+
+-- price [item] --amount [amount]
+
+--checkout
+
+recieve your itemized receipt
+
+-h, --help
+
+display the help menu listing all commands
 
 # Base Prices and 'inventory'
 
@@ -187,10 +223,16 @@ We look forward to your next visit!
 
 ## Future Considerations
 
-- Future Considerations - how to scale and add new pricing rules in the future.
+- how to scale and add new pricing rules in the future.
 - How do we apply multiple offers at the same time?
 - Need to limit the ability to checkout before pricing is added?
-- Validating inputs
+- validating inputs
+
+* commands
+* negative
+* numbers
+* text
+* code injection
 
 ## Test Coverage
 
@@ -202,13 +244,10 @@ We look forward to your next visit!
 
 #
 
-## Criteria
+## Challenges
 
-The solution will be examined from these perspectives:
+- Having to research how the commander library works from scratch
+- Attempting to use readline and mock readline with Jest was not a bad starting point, it was very difficult to accurately mock the readline interface - this cost approximately the first 5 hours of development time on the project.
 
-- good design
-- readability
-- maintenance
-- testing
-- operational-ness
-- aesthetics
+- Formatting text to look good in the CLI is tricky, hence turning to experimenting with chalk and considering use of Boxen https://www.npmjs.com/package/boxen library
+- Handling state management in Node. I made the choice to use FS and JSON to hold the state of the cart, prices and deals.
