@@ -52,6 +52,7 @@ The solution will be examined from these perspectives:
 - Commander
 - FS
 - ChalkJS
+- Lodash
 
 ## Commands
 
