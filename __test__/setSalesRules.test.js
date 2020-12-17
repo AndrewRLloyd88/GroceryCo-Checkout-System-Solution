@@ -2,6 +2,7 @@ const setSalesRules = require('../helpers/setSalesRules');
 const rules = {};
 const ruleComponents = ['apple', 3, 'threepak', 0.75];
 const rulesPath = 'testrule.json';
+const testAddRule = 'testaddRule.json';
 
 describe('setSalesRules', () => {
   describe('setRule', () => {

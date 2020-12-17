@@ -3,13 +3,17 @@ let _ = require('lodash');
 const getSalesRules = require('./getSalesRules');
 
 const setRule = (item, quantity, salename, pricepoint, rulesPath) => {
+  let salesRules = {};
   //write in the sales rule to a json file
   buildRule(item, quantity, salename, pricepoint, rulesPath);
 
-  const successMessage =
-    'You have successfully added the threepak sale to the sales rules. Shoppers can now buy 3 apples for $0.75';
-
-  return successMessage;
+  salesRules = getSalesRules.getCurrentRules(rulesPath);
+  //check that we have saved the rule successfully
+  if (_.isEqual(salesRules[item], { quantity, salename, pricepoint })) {
+    const successMessage =
+    `You have successfully added the ${salename} sale to the sales rules. Shoppers can now buy ${quantity} ${item}s for $${pricepoint}`;
+    return successMessage;
+  }
 };
 
 const buildRule = (item, quantity, salename, pricepoint, rulesPath) => {
@@ -19,15 +23,15 @@ const buildRule = (item, quantity, salename, pricepoint, rulesPath) => {
 
   //does a rules file exist?
   rules = checkIfRuleFileExists(ruleComponents, rulesPath);
-  console.log(rules);
+
   //if the rules file exists
   if (rules === undefined) {
     //get current rules
     rules = getSalesRules.getCurrentRules(rulesPath);
-    console.log(rules);
+
     //build new rule
     ruletoadd = buildRuleObject(ruleComponents);
-    console.log('ruletoadd: ', ruletoadd);
+
     //check if the item to add already exists
     if (_.isEqual(rules[item], ruletoadd[item])) {
       return rules;
@@ -38,7 +42,6 @@ const buildRule = (item, quantity, salename, pricepoint, rulesPath) => {
     writeRule(rules, rulesPath);
     return rules;
   }
-
 };
 
 const writeRule = (rule, rulesPath) => {
