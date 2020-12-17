@@ -35,10 +35,12 @@ The solution will be examined from these perspectives:
 
 ## User Stories
 
-- A User must be able to imput a single unsorted list of items into a command line interface
+- A User must be able to input a single unsorted list of items into a command line interface
 - The user must recieve an itemzed receipt and total price as an output
 - An item may be priced individually
 - A user must be able to re-declare price values
+- A user should be able to see items currently in their cart
+- A user should be able to access a list of all current and previous prices
 
 ## Getting Started
 
@@ -67,6 +69,8 @@ adds an item to your cart
 view current items in cart
 
 --pricelist
+
+![Printed Receipt](./docs/pricelistfeature.png 'Optional Title')
 
 list current unit prices
 
@@ -180,7 +184,7 @@ We look forward to your next visit!
 
 ![Printed Receipt](./docs/receipt_s2.png 'Optional Title')
 
-## Scenario 3
+## Scenario 3 - Unfinished
 
 ```
 $ gco price apple 75 # this will be ignored since lowest price is 50
@@ -190,6 +194,7 @@ $ gco price apple 50 # this will be preferred price for a single apple
 $ gco price apple --quantity 2 --name "Buy 1 get 1 free" 50 # This will be used if there are 2 apples
 (2 % 2 === 0)
 (This rule would apply after the Threepak offer)
+
 $ gco price apple --quantity 3 --name "Threepak" 75 # This will be used if there are 3 apples...
 (This rule would apply first in this scenario)
 (5 % 3 === 2)
@@ -222,35 +227,44 @@ We look forward to your next visit!
 
 - What format do the pricing rules need to be in?
 - How do we design the pricing rules?
-- What items do we want to allow? a pre-determined set of items in an array or any items within reason?
+- What items do we want to allow? A pre-determined set of items in an array or any items within reason?
+- Could a 50% off ALL items be accounted for?
 
 ## Future Considerations
 
-- how to scale and add new pricing rules in the future.
-- How do we apply multiple offers at the same time?
-- Need to limit the ability to checkout before pricing is added?
+- How to scale available inventory and add new pricing rules.
+- How do we apply multiple offers at the same time? Average or using modulo (%) to group clusters of items together by quantity
+- Limit the ability to checkout before pricing is added?
 - validating inputs
 
-* commands
-* negative
-* numbers
-* text
-* code injection
+* Commands - commander takes care of some of this
+* Negative numbers currently --1.10 is allowed
+* Text e.g. pineapple (does not currently have a price in the system)
+* Code injection protection (template literals)
+
+## Future Implementations
+
+- Fix user added sales rules
+- Implement sales schemes
+- Add sequential serialized ID to categorized items and listed items on receipt
 
 ## Test Coverage
 
 | File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
 | --------------------- | ------- | -------- | ------- | ------- | ----------------- |
-| All files             | 70.37   | 44.44    | 71.43   | 70.37   |
+| All files             | 77.53   | 45.45    | 76.92   | 77.53   |
+| getSalesRules.js      | 100     | 50       | 100     | 100     | 4                 |
 | listItemsAndPrices.js | 93.75   | 75       | 100     | 93.75   | 7                 |
-| stateHelpers.js       | 60.53   | 35.71    | 60      | 60.53   | 7-24,29-30        |
+| setSalesRules.js      | 86.67   | 50       | 80      | 86.67   | 29-30,35-36       |
+| stateHelpers.js       | 59.46   | 35.71    | 60      | 59.46   | 7-24,29-30        |
 
 #
 
 ## Challenges
 
 - Having to research how the commander library works from scratch
-- Attempting to use readline and mock readline with Jest was not a bad starting point, it was very difficult to accurately mock the readline interface - this cost approximately the first 5 hours of development time on the project.
+- Attempting to use readline and mock readline with Jest was not a good place to start. It was very difficult to mock the readline interface to write any meaningful tests. This along with researching potential other libraries cost approximately the first 5 hours of development time on the project.
 
 - Formatting text to look good in the CLI is tricky, hence turning to experimenting with chalk and considering use of Boxen https://www.npmjs.com/package/boxen library
-- Handling state management in Node. I made the choice to use FS and JSON to hold the state of the cart, prices and deals.
+
+- Handling state management in Node. I made the choice to use FS and JSON to hold the state of the cart, prices and deals. This decision and implementation ultimately aided testing in Jest.

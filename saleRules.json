@@ -1,0 +1,12 @@
+{
+  "apple": [
+    { "quantity": "2", "salename": "Buy1Get1Free", "pricepoint": ".75" }
+  ],
+  "orange": [
+    {
+      "quantity": "2",
+      "salename": "Buy 5 for the price of 4",
+      "pricepoint": "3.20"
+    }
+  ]
+}

@@ -37,7 +37,7 @@ describe('setSalesRules', () => {
     test('Should return an object containing the sales rules the user input', () => {
       const returnValue = setSalesRules.buildRuleObject(ruleComponents);
       expect(returnValue).toEqual({
-        apple: { quantity: 3, salename: 'threepak', pricepoint: 0.75 },
+        apple: [{ quantity: 3, salename: 'threepak', pricepoint: 0.75 }],
       });
     });
   });

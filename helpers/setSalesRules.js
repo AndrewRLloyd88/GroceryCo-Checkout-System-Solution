@@ -8,12 +8,9 @@ const setRule = (item, quantity, salename, pricepoint, rulesPath) => {
   buildRule(item, quantity, salename, pricepoint, rulesPath);
 
   salesRules = getSalesRules.getCurrentRules(rulesPath);
-  //check that we have saved the rule successfully
-  if (_.isEqual(salesRules[item], { quantity, salename, pricepoint })) {
-    const successMessage =
-    `You have successfully added the ${salename} sale to the sales rules. Shoppers can now buy ${quantity} ${item}s for $${pricepoint}`;
-    return successMessage;
-  }
+
+  const successMessage = `You have successfully added the ${salename} sale to the sales rules. Shoppers can now buy ${quantity} ${item}s for $${pricepoint}`;
+  return successMessage;
 };
 
 const buildRule = (item, quantity, salename, pricepoint, rulesPath) => {
@@ -21,27 +18,9 @@ const buildRule = (item, quantity, salename, pricepoint, rulesPath) => {
   let rules = {};
   let ruletoadd = {};
 
-  //does a rules file exist?
+  // does a rules file exist?
   rules = checkIfRuleFileExists(ruleComponents, rulesPath);
-
-  //if the rules file exists
-  if (rules === undefined) {
-    //get current rules
-    rules = getSalesRules.getCurrentRules(rulesPath);
-
-    //build new rule
-    ruletoadd = buildRuleObject(ruleComponents);
-
-    //check if the item to add already exists
-    if (_.isEqual(rules[item], ruletoadd[item])) {
-      return rules;
-    }
-    //add new rule to current rules
-    rules[item] += ruletoadd[item];
-    //write rule into json file
-    writeRule(rules, rulesPath);
-    return rules;
-  }
+  console.log(rules);
 };
 
 const writeRule = (rule, rulesPath) => {
@@ -54,13 +33,14 @@ const checkIfRuleFileExists = (ruleComponents, rulesPath) => {
     const rule = buildRuleObject(ruleComponents);
     writeRule(rule, rulesPath);
   }
+  const rule = buildRuleObject(ruleComponents);
   return;
 };
 
 const buildRuleObject = (ruleComponents) => {
   const rule = {};
   const [item, quantity, salename, pricepoint] = ruleComponents;
-  rule[item] = { quantity, salename, pricepoint };
+  rule[item] = [{ quantity, salename, pricepoint }];
   return rule;
 };
 
