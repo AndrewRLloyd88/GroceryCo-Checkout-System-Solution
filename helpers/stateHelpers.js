@@ -48,7 +48,6 @@ const getUnitPrices = (unitPricePath) => {
 const setUnitPrice = (unitPrices, item, amount, pricePath, previousAmount) => {
 
 priceList = unitPrices;
-console.log(priceList)
 
 priceList[item] = {currentPrice: parseFloat(amount), previousPrice: parseFloat(previousAmount)}
 

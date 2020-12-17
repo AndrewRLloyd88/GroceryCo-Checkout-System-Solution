@@ -88,6 +88,8 @@ recieve your itemized receipt
 -h, --help
 
 display the help menu listing all commands
+<br>
+<br>
 
 # Base Prices and 'inventory'
 
