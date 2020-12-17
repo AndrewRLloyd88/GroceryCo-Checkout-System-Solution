@@ -194,7 +194,13 @@ We look forward to your next visit!
 
 ## Test Coverage
 
-## Further Test Coverage Needed
+| File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
+| --------------------- | ------- | -------- | ------- | ------- | ----------------- |
+| All files             | 70.37   | 44.44    | 71.43   | 70.37   |
+| listItemsAndPrices.js | 93.75   | 75       | 100     | 93.75   | 7                 |
+| stateHelpers.js       | 60.53   | 35.71    | 60      | 60.53   | 7-24,29-30        |
+
+#
 
 ## Criteria
 
