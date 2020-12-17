@@ -155,7 +155,7 @@ $ gco price apple --quantity 3 --name "Threepak" 75 # This will be used if there
 (This rule would apply first in this scenario)
 (5 % 3 === 2)
 
-$ # Note.... apply the discount for the AVERAGE price of the items.
+$ # apply the discount for the AVERAGE price of the items.
 
 $
 $ gco add apple
