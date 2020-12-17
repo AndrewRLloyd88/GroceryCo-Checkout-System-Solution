@@ -46,10 +46,9 @@ if(program.price && !program.amount){
 
 //set price for item and promotions
 if (program.price && program.amount) {
-  console.log(program.price)
-  console.log(program.amount)
+  unitPrices = stateHelpers.getUnitPrices(unitPricePath)
   const previousAmount = unitPrices[program.price].currentPrice
-  stateHelpers.setUnitPrice(unitPrices, program.price, program.amount, previousAmount)
+  stateHelpers.setUnitPrice(unitPrices, program.price, program.amount, unitPricePath, previousAmount)
   formatUnitPrices(unitPrices)
 }
 
