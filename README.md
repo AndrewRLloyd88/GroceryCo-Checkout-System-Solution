@@ -102,6 +102,8 @@ We look forward to your next visit!
 
 ```
 
+![Printed Receipt](./docs/scenario1.png 'Optional Title')
+
 ## Scenario 2
 
 ```
@@ -141,32 +143,40 @@ We look forward to your next visit!
 
 ## Scenario 3
 
-```$ gco price orange 75 # this will be ignored since lowest price is 50
+```
+$ gco price apple 75 # this will be ignored since lowest price is 50
 
-$ gco price orange 50 # this will be preferred price for single oranges
+$ gco price apple 50 # this will be preferred price for a single apple
 
-$ gco price orange --quantity 2 --name "Buy 1 get 1 free" 50 # This will be used if there are 2 oranges
-
-$ gco price orange --quantity 3 --name "Threepak" 75 # This will be used if there are 3 oranges...
+$ gco price apple --quantity 2 --name "Buy 1 get 1 free" 50 # This will be used if there are 2 apples
+(2 % 2 === 0)
+(This rule would apply after the Threepak offer)
+$ gco price apple --quantity 3 --name "Threepak" 75 # This will be used if there are 3 apples...
+(This rule would apply first in this scenario)
+(5 % 3 === 2)
 
 $ # Note.... apply the discount for the AVERAGE price of the items.
 
 $
-$ gco add orange
+$ gco add apple
+$ gco add apple
+$ gco add apple
+$ gco add apple
 $ gco add apple
 $
 $ gco checkout
+==========================================
 > Thank you for shopping at GroceryCo!
 Here are your items
 
-  APPLE $0.75
-  ORANGE $0.50
+  APPLE x3 THREEPAK PROMOTION 3 @ $0.75
+  APPLE x2 BUY ONE GET ONE FREE @ $1.50
 
-  TOTAL: $1.25
+  TOTAL: $2.25
 
-Come again!
+We look forward to your next visit!
 
-====
+==========================================
 ```
 
 ## Design Considerations
