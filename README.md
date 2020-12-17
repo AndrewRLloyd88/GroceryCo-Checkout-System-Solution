@@ -27,8 +27,33 @@ Implement a checkout system which handles their pricing schemes.
 - A User must be able to imput a single unsorted list of items into a command line interface
 - The user must recieve an itemzed receipt and total price as an output
 - An item may be priced individually
+- A user must be able to re-declare price values
 
-# Base Prices
+## Getting Started
+
+1. Fork this repository, then clone your fork of this repository.
+2. Install dependencies using the npm install command.
+3. cd into the root directory of the project and type node gco --help to view a list of command line options.
+
+## Dependencies
+
+- Jest
+- Commander
+- FS
+- ChalkJS
+
+## Commands
+
+Options:
+--add <item> adds an item to your cart
+--cart view cart
+--pricelist list unit prices
+--price <item> set a price for an item
+--amount <amount> change the unit price for the selected item
+--checkout recieve your itemized receipt
+-h, --help display help for command
+
+# Base Prices and 'inventory'
 
 - Contained in unitPrices.json
 
@@ -148,17 +173,18 @@ Come again!
 
 - What format do the pricing rules need to be in?
 - How do we design the pricing rules?
+- What items do we want to allow? a pre-determined set of items in an array or any items within reason?
+
+## Future Considerations
+
 - Future Considerations - how to scale and add new pricing rules in the future.
-- What items do we want to allow a pre-determined set of items in an array or any items within reason?
 - How do we apply multiple offers at the same time?
 - Need to limit the ability to checkout before pricing is added?
+- Validating inputs
 
-## Dependencies
+## Test Coverage
 
-- Jest
-- Commander
-- FS
-- ChalkJS
+## Further Test Coverage Needed
 
 ## Criteria
 
